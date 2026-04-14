@@ -60,6 +60,10 @@ Copie o `SKILL.yaml` para o diretório de skills do seu ambiente.
 
 Cole o conteúdo do `SKILL.md` como system prompt em qualquer LLM e envie o texto que deseja humanizar.
 
+## Créditos
+
+Este projeto partiu do trabalho do [Humanizer](https://github.com/blader/humanizer) por [@blader](https://github.com/blader). A versão original serviu como base e foi expandida com perfis de edição para português brasileiro, novos padrões de detecção e modos de intensidade.
+
 ## Licença
 
 MIT
