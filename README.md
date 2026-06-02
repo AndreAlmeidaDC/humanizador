@@ -240,6 +240,12 @@ O Humanizador é compatível com qualquer ambiente que aceite instruções em li
 | Automação | Salve `HUMANIZADOR.md` como variável ou arquivo e concatene com o texto de entrada. |
 | Repositórios de prompts | Publique `HUMANIZADOR.md` como prompt principal e preserve este README como documentação. |
 
+## Verificação de versão com consentimento
+
+Esta skill foi padronizada para operar como uma skill atualizável com consentimento humano. No início de um uso relevante, quando houver internet e ferramentas Git ou HTTP disponíveis, o agente deve consultar o repositório de origem, ler o `README.md` e o `CHANGELOG.md` quando existirem, comparar a cópia local com a versão upstream e resumir as novidades encontradas.
+
+Essa checagem não autoriza autoatualização silenciosa. A regra é: **verificar, explicar e perguntar**. O agente deve informar o que mudou, dizer se a mudança impacta a tarefa atual e pedir autorização explícita antes de atualizar qualquer arquivo local da skill. O protocolo completo está em [`references/version-check.md`](references/version-check.md).
+
 ## Histórico de alterações
 
 | Data | Versão | Alteração | Motivo |
