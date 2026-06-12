@@ -5,7 +5,7 @@ Licença: MIT
 
 O **Humanizador Universal** é uma especificação de comportamento editorial para modelos de linguagem e agentes de IA. Ele foi desenhado para remover sinais comuns de texto com cara de IA em **português brasileiro**, sem inventar fatos, sem alterar o sentido original e sem transformar a voz do autor em uma voz genérica de consultoria.
 
-A versão 3.0.0 deixa de ser uma skill acoplada ao Manus e passa a funcionar como um **prompt universal portátil**. Isso significa que o Humanizador pode ser usado em qualquer LLM, agente, aplicação de chat, orquestrador, automação ou API que aceite instruções em linguagem natural.
+A versão 3.0.0 deixa de ser uma skill acoplada a uma plataforma específica e passa a funcionar como um **prompt universal portátil**. Isso significa que o Humanizador pode ser usado em qualquer LLM, agente, aplicação de chat, orquestrador, automação ou API que aceite instruções em linguagem natural.
 
 > Humanizar não é inventar. O Humanizador melhora ritmo, clareza, naturalidade e especificidade, mas não cria números, fontes, casos, experiências pessoais, resultados ou opiniões que não estejam no texto original.
 
@@ -28,7 +28,6 @@ A versão anterior foi escrita no formato de skill com metadados e campos associ
 | `HUMANIZADOR.md` | Prompt universal principal. É o arquivo recomendado para copiar como system prompt, developer prompt, custom instruction ou instrução permanente de agente. |
 | `SKILL.md` | Cópia do prompt universal mantida para compatibilidade com fluxos que procuram automaticamente um arquivo chamado `SKILL.md`. |
 | `README.md` | Documentação detalhada para humanos, com explicação de funcionamento, parâmetros, exemplos e boas práticas. |
-| `manifest.txt` | Inventário simples dos arquivos atuais do pacote. |
 
 ## Como funciona
 

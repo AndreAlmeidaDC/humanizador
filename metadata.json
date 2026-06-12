@@ -2,14 +2,28 @@
   "name": "humanizador",
   "title": "Humanizador",
   "description": "Skill para remover sinais de texto com cara de IA em português brasileiro sem inventar fatos.",
-  "version": "2026.06.10",
+  "version": "2026.06.11",
   "maturity": "stable",
   "origin_url": "https://github.com/AndreAlmeidaDC/humanizador",
   "origin_git_url": "https://github.com/AndreAlmeidaDC/humanizador.git",
   "default_branch": "master",
   "author": "André Almeida",
   "license": "MIT",
-  "last_standardized_at": "2026-06-10 19:15 GMT-3",
+  "declared_capabilities": {
+    "network_egress": {
+      "expected": false,
+      "reason": "Pure text-transformation prompt; no network access, no external tools."
+    },
+    "subprocess": {
+      "expected": false,
+      "reason": "No code execution; the skill is instruction text only."
+    },
+    "dependency_install": {
+      "expected": false,
+      "reason": "No dependencies and no installation."
+    }
+  },
+  "last_standardized_at": "2026-06-11 GMT-3",
   "required_files": [
     "SKILL.md",
     "README.md",

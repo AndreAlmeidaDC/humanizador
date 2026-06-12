@@ -1,5 +1,0 @@
-HUMANIZADOR.md
-SKILL.md
-SKILL.yaml
-README.md
-manifest.txt

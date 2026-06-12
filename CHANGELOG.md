@@ -4,5 +4,6 @@ All notable changes to this skill are documented here. This file is the preferre
 
 | Date | Time | Version | Changes |
 |---|---|---|---|
+| 2026-06-11 | 12:00 GMT-3 | 2026.06.11 | Removed dead Manus-era files (SKILL.yaml, manifest.txt), consolidated metadata, removed platform-specific mention, declared zero surface capabilities. |
 | 2026-06-10 | 19:15 GMT-3 | 2026.06.10 | Synced shared version check protocol to v2: version source priority, HTTP and API check methods that work without Git, session cooldown rule, generalized regression-free update rule. |
 | 2026-06-02 | 09:02 GMT-3 | 2026.06.02 | Standardized the repository as an update-aware skill: added origin version check protocol, metadata, governance, contribution guidelines and local validation requirements. |
