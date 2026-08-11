@@ -1,7 +1,9 @@
-# Humanizador Universal 3.0.0
+# Humanizador Universal 3.1.0
 
 Autor: André Almeida  
 Licença: MIT
+
+
 
 ## Como usar este arquivo
 
@@ -32,6 +34,48 @@ Exemplo ruim:
 Exemplo correto:
 
 > O texto afirma ganho de produtividade, mas não traz número nem evidência para sustentar isso.
+
+## Padrão prioritário: o paralelismo negativo (“não é X, é Y”)
+
+Este é hoje o sinal estrutural mais forte de texto gerado por IA, e por isso tem seção
+própria. A construção aparece como “não é X, é Y”, “não se trata de X, e sim de Y”,
+“não apenas X, mas Y”, “menos sobre X e mais sobre Y”, “isso não é só X, é Y”. Também
+aparece na forma de antítese curta: “não é sorte, é preparo”.
+
+O problema não é a construção em si. Ela é legítima e aparece em boa literatura. Serve
+para criar contraste e ênfase, e às vezes é a forma mais limpa de dizer algo. O problema
+é a **frequência automática**: a IA usa esse molde repetidamente, às vezes em quase todo
+parágrafo, até virar tique. Quando isso acontece, o texto ganha um balanço mecânico que
+denuncia a máquina, mesmo sem nenhuma palavra suspeita e sem travessão.
+
+Como tratar:
+
+- **Conte as ocorrências.** Se o molde aparece mais de uma vez em poucos parágrafos, é
+  padrão, não escolha. Quebre a maioria e preserve no máximo uma ocorrência, e só se ela
+  for a mais forte e realmente ganhar do restante.
+- **Prefira a forma afirmativa direta.** “Não é só rápido, é confiável” quase sempre quer
+  dizer “é rápido e confiável”. Diga isso. A versão negativa só se justifica quando o X
+  negado é uma crença real que o leitor tem, e derrubá-la acrescenta informação.
+- **Teste do X vazio.** Se o X negado é um espantalho que ninguém afirmaria (“não é apenas
+  um produto, é uma experiência”), corte o X e diga só o que a coisa é, de forma concreta.
+- **Varie a estrutura quando o contraste for real.** Se o contraste importa, expresse por
+  outros meios: subordinação, uma frase que mostra em vez de anunciar, ou um exemplo
+  concreto no lugar da fórmula.
+
+Exemplos:
+
+> Antes: Não se trata apenas de vender um produto, e sim de construir uma relação.
+> Depois: O objetivo é construir relação com o cliente, não fechar uma venda e sumir.
+
+> Antes: Isso não é sobre tecnologia. É sobre pessoas.
+> Depois: A parte difícil aqui não é a tecnologia, é convencer o time a mudar de rotina.
+
+> Antes: Não é apenas uma ferramenta, é uma plataforma completa.
+> Depois: A ferramenta cobre cadastro, cobrança e relatório no mesmo lugar.
+
+A segunda e a terceira reescritas mantêm um resquício de contraste porque nesses casos o
+contraste diz algo real. A primeira elimina o molde porque o X negado era vazio. Essa é a
+decisão a tomar caso a caso: o contraste acrescenta informação, ou é só balanço retórico?
 
 ## Entradas aceitas
 
@@ -143,7 +187,10 @@ Use estes padrões como alertas, não como dogma. Nem toda ocorrência exige cor
 | Abstração vazia | “valor”, “impacto”, “transformação”, “eficiência”, “inovação”, “maturidade”, “governança”, “sinergia” | Concretize quando o texto original permitir. |
 | Verbos de pose | “atua como”, “se posiciona como”, “representa”, “figura como”, “cumpre o papel de” | Troque por verbo que diga a ação. |
 | Simetria artificial | três blocos com mesma estrutura, cadência idêntica, contraste previsível | Quebre a simetria quando ela parecer fabricada. |
-| Frase de efeito teatral | “não se trata apenas de”, “a verdadeira questão é”, “o que realmente importa”, “no fim, tudo se resume a” | Corte o teatro e vá ao ponto. |
+| Frase de efeito teatral | “a verdadeira questão é”, “o que realmente importa”, “no fim, tudo se resume a” | Corte o teatro e vá ao ponto. |
+| Paralelismo negativo | “não é X, é Y”, “não apenas X, mas Y”, “não se trata de X, e sim de Y”, “menos sobre X e mais sobre Y” | Ver a seção própria sobre paralelismo negativo. Conte ocorrências, quebre o padrão, prefira a forma afirmativa. |
+| Transição-isca | “o pulo do gato?”, “a real?”, “o detalhe?”, “e tem mais”, “o que quase ninguém percebe” abrindo frase para criar suspense | Corte a isca e entregue a informação direto. Cheira a infomercial. |
+| Regra de três mecânica | tudo vem em trios: “rápido, simples e eficiente”, “economize tempo, reduza custo, aumente resultado” | Trio é bom com moderação. Quando vira padrão em todo parágrafo, quebre para dois ou quatro itens, ou desmonte em frase corrida. |
 | Tom servil de assistente | “ótima pergunta”, “claro”, “com certeza”, “espero que isso ajude”, “se quiser, posso” | Remova cordialidade automática. |
 | Hedging excessivo | “pode talvez”, “possivelmente”, “em alguma medida”, “de certa forma”, “parece indicar” | Seja preciso sobre o grau de certeza. |
 | Conclusão vazia | “o futuro é promissor”, “abre caminho para novas possibilidades”, “representa um passo importante” | Conclua com consequência concreta ou pare antes. |

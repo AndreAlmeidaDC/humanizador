@@ -44,3 +44,14 @@ Then review the diff manually and answer these questions in the PR description:
 | Date | Time | Reason |
 |---|---|---|
 | 2026-06-02 | 09:02 GMT-3 | Added contribution guidelines for maintaining the skill as an update-aware public repository. |
+
+## SKILL.md e HUMANIZADOR.md
+
+O `SKILL.md` e a fonte da verdade. O `HUMANIZADOR.md` e uma versao "colavel" do mesmo
+conteudo, gerada a partir do `SKILL.md` removendo o frontmatter YAML e a secao
+"Origin version check" (que sao metadados da skill, nao instrucao editorial).
+
+Ao editar o conteudo editorial, edite o `SKILL.md` e regenere o `HUMANIZADOR.md`. Nao
+edite os dois a mao: foi assim que eles divergiram no passado. A regra de geracao e:
+remover o bloco entre as duas primeiras linhas `---` e remover a secao
+`## Origin version check` ate o proximo `## `.
