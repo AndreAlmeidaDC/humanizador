@@ -1,11 +1,11 @@
-# Humanizador Universal 3.0.0
+# Humanizador Universal 3.1.0
 
 Autor: André Almeida  
 Licença: MIT
 
 O **Humanizador Universal** é uma especificação de comportamento editorial para modelos de linguagem e agentes de IA. Ele foi desenhado para remover sinais comuns de texto com cara de IA em **português brasileiro**, sem inventar fatos, sem alterar o sentido original e sem transformar a voz do autor em uma voz genérica de consultoria.
 
-A versão 3.0.0 deixa de ser uma skill acoplada a uma plataforma específica e passa a funcionar como um **prompt universal portátil**. Isso significa que o Humanizador pode ser usado em qualquer LLM, agente, aplicação de chat, orquestrador, automação ou API que aceite instruções em linguagem natural.
+Desde a versão 3.0.0, deixou de ser uma skill acoplada a uma plataforma específica e passou a funcionar como um **prompt universal portátil**. Isso significa que o Humanizador pode ser usado em qualquer LLM, agente, aplicação de chat, orquestrador, automação ou API que aceite instruções em linguagem natural. A versão 3.1.0 manteve essa arquitetura e acrescentou conteúdo editorial novo (ver Changelog).
 
 > Humanizar não é inventar. O Humanizador melhora ritmo, clareza, naturalidade e especificidade, mas não cria números, fontes, casos, experiências pessoais, resultados ou opiniões que não estejam no texto original.
 
@@ -249,6 +249,7 @@ Essa checagem não autoriza autoatualização silenciosa. A regra é: **verifica
 
 | Data | Versão | Alteração | Motivo |
 |---|---|---|---|
+| 2026-08-05 | 3.1.0 | Seção dedicada ao paralelismo negativo ("não é X, é Y") como principal marca estrutural de texto de IA, com detecção por frequência e orientação de reescrita; novas entradas na biblioteca de padrões (transição-isca, regra de três mecânica); `HUMANIZADOR.md` passou a ser gerado a partir do `SKILL.md` em vez de mantido à mão. | Fechar a lacuna do padrão estrutural mais comum não coberto pela versão anterior, e eliminar divergência entre os dois arquivos de conteúdo. |
 | 2026-05-26 | 3.0.0 | Transformação da skill em prompt universal portátil; remoção de campos específicos de plataforma; criação de documentação detalhada no README; criação de `HUMANIZADOR.md`; manutenção de `SKILL.md` como cópia compatível. | Permitir uso em qualquer agente ou LLM, conforme solicitação do autor. |
 
 ## Créditos
