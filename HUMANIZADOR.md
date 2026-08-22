@@ -1,4 +1,4 @@
-# Humanizador Universal 3.1.0
+# Humanizador Universal 3.2.0
 
 Autor: André Almeida  
 Licença: MIT
@@ -76,6 +76,34 @@ Exemplos:
 A segunda e a terceira reescritas mantêm um resquício de contraste porque nesses casos o
 contraste diz algo real. A primeira elimina o molde porque o X negado era vazio. Essa é a
 decisão a tomar caso a caso: o contraste acrescenta informação, ou é só balanço retórico?
+
+## Padrão: dois-pontos como muleta explicativa
+
+Não usar `:` apenas para introduzir explicação, conclusão, reformulação ou consequência da
+frase anterior. Esse uso é comum em texto gerado por IA e costuma deixar a escrita com cara
+de definição formal, como se cada frase fosse uma entrada de glossário.
+
+Evitar construções como:
+
+> “O problema é simples: o agente perde tudo.”
+> “A situação clássica: a execução morre no meio.”
+> “A conclusão é clara: precisamos persistir o estado.”
+
+Preferir construções mais naturais e encadeadas:
+
+> “O problema é simples, porque o agente perde tudo.”
+> “A situação clássica é quando a execução morre no meio.”
+> “A conclusão é que precisamos persistir o estado.”
+> “Já vi aquela situação clássica em que a execução morre no meio…”
+
+**Teste antes de usar `:`:** a frase continuaria mais natural com vírgula, “que”, “quando”,
+“porque”, “em que”, “ou seja”, ou simplesmente reescrevendo o período? Se sim, prefira a
+forma natural. O dois-pontos deveria ser a exceção que resta depois desse teste, não o
+primeiro recurso.
+
+**Quando o dois-pontos continua certo:** antes de lista, enumeração, citação, exemplo
+destacado, ou qualquer estrutura em que a pontuação seja semanticamente necessária, não
+apenas estilística. Nesses casos ele não é muleta, é a pontuação correta.
 
 ## Entradas aceitas
 
@@ -189,6 +217,8 @@ Use estes padrões como alertas, não como dogma. Nem toda ocorrência exige cor
 | Simetria artificial | três blocos com mesma estrutura, cadência idêntica, contraste previsível | Quebre a simetria quando ela parecer fabricada. |
 | Frase de efeito teatral | “a verdadeira questão é”, “o que realmente importa”, “no fim, tudo se resume a” | Corte o teatro e vá ao ponto. |
 | Paralelismo negativo | “não é X, é Y”, “não apenas X, mas Y”, “não se trata de X, e sim de Y”, “menos sobre X e mais sobre Y” | Ver a seção própria sobre paralelismo negativo. Conte ocorrências, quebre o padrão, prefira a forma afirmativa. |
+| Dois-pontos como muleta | `:` introduzindo explicação, conclusão ou consequência da frase anterior, dando cara de definição formal | Ver a seção própria sobre dois-pontos. Teste se vírgula, “que”, “porque” ou “quando” soa mais natural. |
+| Caracteres invisíveis | zero width space, soft hyphen, bloco de tags Unicode, homóglifo cirílico no meio de palavra portuguesa | Ver a seção de sanitização. Regra determinística: remover ou normalizar sempre, e informar o usuário no diagnóstico. |
 | Transição-isca | “o pulo do gato?”, “a real?”, “o detalhe?”, “e tem mais”, “o que quase ninguém percebe” abrindo frase para criar suspense | Corte a isca e entregue a informação direto. Cheira a infomercial. |
 | Regra de três mecânica | tudo vem em trios: “rápido, simples e eficiente”, “economize tempo, reduza custo, aumente resultado” | Trio é bom com moderação. Quando vira padrão em todo parágrafo, quebre para dois ou quatro itens, ou desmonte em frase corrida. |
 | Tom servil de assistente | “ótima pergunta”, “claro”, “com certeza”, “espero que isso ajude”, “se quiser, posso” | Remova cordialidade automática. |
@@ -209,6 +239,57 @@ Use estes padrões como alertas, não como dogma. Nem toda ocorrência exige cor
 Se o usuário fornecer uma amostra de texto do autor, observe tamanho médio das frases, abertura dos parágrafos, grau de formalidade, vocabulário, uso de ironia ou secura, forma de concluir, tolerância a frases curtas, tendência a explicar muito ou cortar cedo, nível de opinião e tipo de transição.
 
 Depois, reproduza o ritmo sem caricaturar. Mantenha o nível de fricção. Não transforme a voz do autor em uma voz genérica de consultoria. Preserve marcas humanas reais, inclusive pequenas assimetrias, desde que elas não prejudiquem clareza.
+
+## Sanitização de caracteres invisíveis
+
+Esta é a única regra determinística da skill. O resto é julgamento editorial; esta é
+verificável e deve ser aplicada sempre, em qualquer perfil e qualquer modo, inclusive no
+modo leve e no modo seguro factual.
+
+Texto colado de ferramentas diversas frequentemente carrega caracteres Unicode que não
+aparecem na tela mas viajam junto. Alguns entram por acidente (copiar de PDF, de editor
+web, de planilha). Outros são inseridos de propósito para rastrear cópia. Independente da
+origem, eles quebram busca, atrapalham leitor de tela, sujam diff e corrompem regex.
+Remover é higiene de texto, não truque.
+
+**Remover sempre:**
+
+| Code point | Nome | Observação |
+|---|---|---|
+| U+200B | Zero width space | O mais comum de todos |
+| U+200C | Zero width non-joiner | Preservar apenas em texto árabe, persa ou índico, onde é semanticamente necessário |
+| U+200D | Zero width joiner | Preservar em emoji composto (família, profissões) e nos scripts acima |
+| U+2060 | Word joiner | |
+| U+FEFF | Zero width no-break space / BOM | Se estiver no meio do texto, é resíduo |
+| U+00AD | Soft hyphen | Vem de PDF e de texto justificado |
+| U+180E | Mongolian vowel separator | |
+| U+200E, U+200F | Left-to-right / right-to-left mark | Preservar apenas em texto bidirecional real |
+| U+202A a U+202E | Embedding e override bidirecional | Fora de texto bidi, é suspeito |
+| U+2066 a U+2069 | Isolates bidirecionais | Idem |
+| U+FE00 a U+FE0F | Variation selectors | Preservar em emoji; fora disso, remover |
+| U+E0000 a U+E007F | Bloco de tags Unicode | Não tem uso legítimo em texto corrido. Consegue carregar uma mensagem ASCII inteira invisível |
+
+**Normalizar, não apagar:**
+
+| Code point | Nome | Ação |
+|---|---|---|
+| U+00A0 | No-break space | Trocar por espaço comum, salvo onde a não quebra é intencional (número e unidade, nome próprio composto) |
+| U+2009, U+200A, U+202F | Thin, hair e narrow no-break space | Trocar por espaço comum |
+| U+2028, U+2029 | Line e paragraph separator | Trocar por quebra de linha normal |
+
+**Homóglifos:** letras de outro alfabeto que parecem latinas, usadas para driblar busca e
+comparação. Os mais comuns são os cirílicos а, е, о, р, с, у, х (U+0430, U+0435, U+043E,
+U+0440, U+0441, U+0443, U+0445) e o ômicron grego ο (U+03BF). Em texto português, uma
+letra cirílica no meio de uma palavra é sempre erro ou marcação. Trocar pela latina
+correspondente.
+
+**Como reportar:** quando encontrar qualquer um destes, informe o usuário no diagnóstico,
+com a contagem e o tipo. Ele tem o direito de saber que o texto vinha marcado. Não remova
+silenciosamente sem dizer.
+
+**O que esta regra não faz:** ela não remove marca d'água estatística (ver a seção sobre
+o assunto no README). São coisas diferentes. Esta regra trata de caracteres que existem
+fisicamente no texto e podem ser contados; marca estatística não é um caractere.
 
 ## Regras duras
 

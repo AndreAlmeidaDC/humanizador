@@ -9,9 +9,18 @@ Desde a versão 3.0.0, deixou de ser uma skill acoplada a uma plataforma especí
 
 > Humanizar não é inventar. O Humanizador melhora ritmo, clareza, naturalidade e especificidade, mas não cria números, fontes, casos, experiências pessoais, resultados ou opiniões que não estejam no texto original.
 
-## O que mudou nesta versão
+## O que mudou na versão 3.2.0
 
-A versão anterior foi escrita no formato de skill com metadados e campos associados a ambientes específicos, como compatibilidade declarada e ferramentas permitidas. A nova versão foi reorganizada para ser independente de plataforma.
+| Adição | O que faz |
+|---|---|
+| Paralelismo negativo (3.1.0) | Seção dedicada ao molde "não é X, é Y" e variantes, hoje a marca estrutural mais forte de texto de IA. Detecção por frequência, não por ocorrência isolada. |
+| Dois-pontos como muleta | Evita `:` usado só para introduzir explicação, conclusão ou consequência, que dá ao texto cara de definição formal. Com teste diagnóstico e ressalva de quando o dois-pontos continua correto. |
+| Sanitização de caracteres invisíveis | Regra determinística que remove ou normaliza zero width space, soft hyphen, marcas bidirecionais, bloco de tags Unicode e homóglifos, informando a contagem no diagnóstico. |
+| Nota sobre marcas d'água | Esclarece a diferença entre caractere invisível (que a skill remove) e marca estatística tipo SynthID (que a skill não promete remover, e por quê). |
+
+## Mudança de arquitetura na versão 3.0.0
+
+A versão 2.x foi escrita no formato de skill com metadados e campos associados a ambientes específicos, como compatibilidade declarada e ferramentas permitidas. A 3.0.0 reorganizou tudo para ser independente de plataforma.
 
 | Área | Antes | Agora |
 |---|---|---|
@@ -223,6 +232,44 @@ A plataforma ajuda os usuários a executar processos com menos etapas manuais.
 
 A saída acima remove pose, nominalização e adjetivo vago. Se o texto original não explicar quais processos são executados nem como a eficiência melhora, o Humanizador não deve inventar esse detalhe.
 
+## Marcas d'água e caracteres invisíveis
+
+Existem duas coisas diferentes que costumam ser chamadas de "marca d'água" em texto, e o
+Humanizador se relaciona com cada uma de um jeito.
+
+**Caracteres invisíveis (o Humanizador remove).** São code points Unicode reais que viajam
+junto com o texto sem aparecer na tela: zero width space, soft hyphen, marcas
+bidirecionais, o bloco de tags Unicode, homóglifos de outro alfabeto. Entram por acidente
+(cópia de PDF, de editor web) ou de propósito, para rastrear cópia. O Humanizador tem uma
+regra determinística que remove ou normaliza esses caracteres em todo perfil e modo, e
+informa a contagem no diagnóstico. Isso é higiene de texto: esses caracteres quebram
+busca, atrapalham leitor de tela e corrompem comparação de arquivos.
+
+**Marca d'água estatística (o Humanizador não promete nada).** É outra categoria. O
+SynthID-Text, do Google DeepMind, publicado na Nature em 2024 e em produção no Gemini,
+não insere caractere nenhum: ele envieza a escolha de tokens durante a geração usando uma
+chave secreta, deixando uma assinatura estatística no texto. Não há o que "apagar", porque
+não existe um caractere para remover.
+
+O que a literatura publicada mostra é que reescrita substantiva (paráfrase, retradução,
+reestruturação) degrada a detectabilidade desse tipo de marca, enquanto edição superficial
+não muda quase nada. O Humanizador faz reescrita substantiva por natureza, então esse
+efeito acontece como consequência, não como funcionalidade.
+
+**Mas ele não promete remoção, por três motivos honestos:**
+
+1. **Não há como verificar.** A chave do detector é secreta. Nem você nem o Humanizador
+   conseguem rodar o detector para confirmar se sobrou sinal. Prometer um resultado que
+   ninguém pode conferir seria vender fumaça.
+2. **O grau de degradação depende de quanto o texto mudou.** Modo leve muda pouco, e pouca
+   mudança significa pouca degradação. Não existe garantia por design.
+3. **A finalidade da skill é editorial.** Ela existe para o texto ficar melhor, não para
+   burlar sistemas de proveniência. Se o seu objetivo é especificamente evasão de detecção,
+   esta não é a ferramenta certa, e o resultado não é garantido de qualquer forma.
+
+Se você está usando IA para rascunhar e depois editando de verdade, o texto resultante é
+seu, e é isso que o Humanizador ajuda a fazer. Essa é a diferença entre editar e disfarçar.
+
 ## Limitações
 
 O Humanizador não verifica fatos fora do texto original, a menos que seja combinado com ferramentas de pesquisa ou checagem externa. Ele também não deve prometer originalidade, indetectabilidade por classificadores de IA ou bypass de sistemas de detecção. A finalidade correta é editorial: melhorar clareza, naturalidade e adequação ao contexto.
@@ -249,6 +296,7 @@ Essa checagem não autoriza autoatualização silenciosa. A regra é: **verifica
 
 | Data | Versão | Alteração | Motivo |
 |---|---|---|---|
+| 2026-08-21 | 3.2.0 | Seção sobre dois-pontos usado como muleta explicativa; regra determinística de sanitização de caracteres invisíveis (zero width, soft hyphen, bidi, bloco de tags Unicode, homóglifos); seção no README distinguindo caractere invisível de marca d'água estatística. | Fechar duas lacunas de padrão estrutural e deixar explícito, com honestidade, o que a skill faz e não faz em relação a marcação de texto. |
 | 2026-08-05 | 3.1.0 | Seção dedicada ao paralelismo negativo ("não é X, é Y") como principal marca estrutural de texto de IA, com detecção por frequência e orientação de reescrita; novas entradas na biblioteca de padrões (transição-isca, regra de três mecânica); `HUMANIZADOR.md` passou a ser gerado a partir do `SKILL.md` em vez de mantido à mão. | Fechar a lacuna do padrão estrutural mais comum não coberto pela versão anterior, e eliminar divergência entre os dois arquivos de conteúdo. |
 | 2026-05-26 | 3.0.0 | Transformação da skill em prompt universal portátil; remoção de campos específicos de plataforma; criação de documentação detalhada no README; criação de `HUMANIZADOR.md`; manutenção de `SKILL.md` como cópia compatível. | Permitir uso em qualquer agente ou LLM, conforme solicitação do autor. |
 
