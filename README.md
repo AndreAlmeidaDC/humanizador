@@ -1,4 +1,4 @@
-# Humanizador Universal 3.1.0
+# Humanizador Universal 3.2.0
 
 Autor: André Almeida  
 Licença: MIT
