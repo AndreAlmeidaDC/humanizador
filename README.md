@@ -1,314 +1,168 @@
-# Humanizador Universal 3.2.0
+# Humanizador Universal 4.0.0
+
+Autor: André Almeida. Licença: MIT.
+
+O Humanizador orienta a revisão de comunicação em português brasileiro. A versão 4.0
+amplia o trabalho editorial para peças visuais, apresentações, interfaces, conversas,
+dados e audiovisual, preservando a proposta original de melhorar a expressão sem
+inventar fatos ou substituir a identidade do autor.
+
+"Humanizar" significa tornar a comunicação compreensível, adequada ao contexto e
+coerente com sua intenção. A skill não identifica autoria por IA, não certifica
+acessibilidade e não promete passar por detectores.
+
+## O que muda na 4.0
+
+- Núcleo comum com módulos selecionados pelo material recebido.
+- Revisão de hierarquia, densidade, legibilidade, redundância e identidade visual.
+- Progressão narrativa em apresentações e carrosséis.
+- Microcopy, estados de interface e conversas com recuperação e controle.
+- Integridade de dados em gráficos e dashboards.
+- Roteiros, narração, relação entre canais, legendas e transcrições fiéis.
+- Separação explícita entre observado, medido, informado, não verificado e proposto.
+- Auditor Unicode executável, somente leitura, em lugar da promessa de limpeza
+  automática ampla.
+- Oferta de atualização explícita quando uma versão nova é encontrada, respeitando
+  autorização já dada e sem autoatualização silenciosa.
+
+A mudança é major porque amplia os gatilhos, reorganiza o pacote e altera a regra de
+Unicode. Os perfis, modos e quatro formatos anteriores continuam aceitos; entram
+material, ação e plano-de-edicao.
+
+## Como usar
+
+Em um chat sem acesso a arquivos, copiar HUMANIZADOR.md como instrução e enviar o
+material em mensagem separada. Esse arquivo inclui os módulos editoriais e mantém
+seleção por tarefa. Imagens, áudio e vídeo só podem ser inspecionados se o modelo e o
+ambiente tiverem suporte real à mídia.
+
+Em um ambiente de skills, instalar o pacote completo. SKILL.md é o núcleo e os
+arquivos de references são lidos sob demanda. Não é necessário instalar dependências
+para usar as instruções editoriais.
+
+Exemplos:
+
+- "Use Humanizador para revisar este post com minha voz, somente-versao."
+- "Analise este carrossel para leitura no celular e proponha as correções por página."
+- "Revise esta landing page preservando identidade, conteúdo e funcionalidades."
+- "Reorganize este gráfico sem mudar dados, unidades, escala ou conclusão."
+- "Adapte o roteiro para narração; ainda não há áudio para avaliar."
+- "Confira esta legenda com o vídeo e preserve o que as pessoas disseram."
+
+## Parâmetros
+
+- material: auto, texto, visual, apresentacao, interface, conversa, dados, audiovisual.
+- acao: auto, diagnosticar, revisar, criar, orientar.
+- perfil: auto, linkedin, email-executivo, documentacao, proposta-comercial, academico,
+  jornalistico.
+- modo: leve, padrao, forte, seguro-factual.
+- formato: completo, somente-versao, diagnostico, comparativo, plano-de-edicao.
+- Contexto opcional: público, objetivo, canal, voz, identidade, restrições e destino.
+
+É possível enviar apenas o material e o pedido. O agente deve inferir escolhas
+reversíveis e perguntar somente quando uma lacuna realmente impedir o trabalho.
+
+## O que pode ser entregue
+
+A entrega acompanha as capacidades reais do ambiente. Com texto, a skill pode orientar
+reescrita direta. Com captura, pode analisar o visível e produzir direção de edição.
+Com um arquivo editável e ferramenta compatível, pode orientar alterações e a
+verificação do resultado. A instrução sozinha não edita um vídeo, mede CSS ou
+renderiza uma apresentação.
+
+O resultado deve distinguir revisão executada de recomendação. Não declarar foco,
+teclado, cálculo, voz, timecode ou contraste aprovado sem a inspeção correspondente.
+
+## Regras que evitam correção cega
+
+Repetição pode ajudar: rótulos, unidades, navegação e mensagens de erro consistentes
+orientam a pessoa. O problema é a repetição sem função que ocupa espaço e compete com
+informação necessária. Três itens, uma cor forte ou um gradiente não provam autoria.
+
+Uma captura reduzida não revela o tamanho original de uma fonte. Um dashboard denso
+pode ser apropriado à tarefa. Uma legenda registra a fala e não deve receber uma nova
+opinião para soar mais natural. Exemplos editoriais precisam preservar o que já
+estava na entrada.
+
+## Arquivos
+
+- SKILL.md: instruções centrais e roteamento.
+- HUMANIZADOR.md: versão portátil gerada, com os módulos incorporados.
+- references/texto.md: perfis, voz, padrões e exemplos com preservação factual.
+- references/visual.md: peças visuais e direção de arte.
+- references/apresentacoes.md: slides, decks e carrosséis.
+- references/interfaces.md: interfaces, microcopy e conversas.
+- references/dados.md: gráficos, infográficos quantitativos e dashboards.
+- references/audiovisual.md: roteiro, mídia, legendas e transcrições.
+- references/unicode.md: limites e procedimento de auditoria.
+- references/fontes.md: pesquisa, URLs, escopo e decisões editoriais.
+- references/cenarios.md: casos de aceitação comportamental.
+- references/version-check.md: verificação e atualização com consentimento.
+- scripts/audit_unicode.py: inventário de caracteres, sem modificar a entrada.
+- scripts/build_prompt.py: geração e conferência da versão portátil.
+- scripts/validate_skill.py: validação estrutural e de consistência.
+- tests/test_tools.py: testes dos helpers.
+- metadata.json: versão e política operacional.
 
-Autor: André Almeida  
-Licença: MIT
+## Unicode
 
-O **Humanizador Universal** é uma especificação de comportamento editorial para modelos de linguagem e agentes de IA. Ele foi desenhado para remover sinais comuns de texto com cara de IA em **português brasileiro**, sem inventar fatos, sem alterar o sentido original e sem transformar a voz do autor em uma voz genérica de consultoria.
+O auditor requer Python 3.10 ou superior e usa apenas a biblioteca padrão:
 
-Desde a versão 3.0.0, deixou de ser uma skill acoplada a uma plataforma específica e passou a funcionar como um **prompt universal portátil**. Isso significa que o Humanizador pode ser usado em qualquer LLM, agente, aplicação de chat, orquestrador, automação ou API que aceite instruções em linguagem natural. A versão 3.1.0 manteve essa arquitetura e acrescentou conteúdo editorial novo (ver Changelog).
+    python scripts/audit_unicode.py --input texto.txt
 
-> Humanizar não é inventar. O Humanizador melhora ritmo, clareza, naturalidade e especificidade, mas não cria números, fontes, casos, experiências pessoais, resultados ou opiniões que não estejam no texto original.
+A saída JSON traz contagens por code point e observações de revisão. O arquivo
+original permanece intacto. Um caractere listado pode ser necessário a um idioma,
+emoji, fórmula ou identificador. A ferramenta não detecta autoria, não procura
+mensagens ocultas completas e não remove marcas estatísticas.
 
-## O que mudou na versão 3.2.0
-
-| Adição | O que faz |
-|---|---|
-| Paralelismo negativo (3.1.0) | Seção dedicada ao molde "não é X, é Y" e variantes, hoje a marca estrutural mais forte de texto de IA. Detecção por frequência, não por ocorrência isolada. |
-| Dois-pontos como muleta | Evita `:` usado só para introduzir explicação, conclusão ou consequência, que dá ao texto cara de definição formal. Com teste diagnóstico e ressalva de quando o dois-pontos continua correto. |
-| Sanitização de caracteres invisíveis | Regra determinística que remove ou normaliza zero width space, soft hyphen, marcas bidirecionais, bloco de tags Unicode e homóglifos, informando a contagem no diagnóstico. |
-| Nota sobre marcas d'água | Esclarece a diferença entre caractere invisível (que a skill remove) e marca estatística tipo SynthID (que a skill não promete remover, e por quê). |
-
-## Mudança de arquitetura na versão 3.0.0
-
-A versão 2.x foi escrita no formato de skill com metadados e campos associados a ambientes específicos, como compatibilidade declarada e ferramentas permitidas. A 3.0.0 reorganizou tudo para ser independente de plataforma.
-
-| Área | Antes | Agora |
-|---|---|---|
-| Dependência de plataforma | Estrutura orientada a skill com metadados de compatibilidade. | Prompt universal em Markdown, copiável para qualquer LLM ou agente. |
-| Ferramentas | Havia lista de ferramentas permitidas, mesmo que a skill não dependesse delas. | Não há dependência de ferramentas externas. |
-| Uso em APIs | Não havia orientação detalhada para chamadas por API. | Há modelos de uso manual, por agente e por API. |
-| Documentação | Documentação empacotada em arquivos PDF/DOCX derivados da versão antiga. | Documentação consolidada no README e instrução universal em `HUMANIZADOR.md`. |
-| Portabilidade | Focada em ambientes específicos. | Compatível com ChatGPT, Claude, Gemini, OpenRouter, agentes customizados, n8n, LangChain, CrewAI, AutoGen, scripts próprios e qualquer sistema que aceite prompt textual. |
-
-## Arquivos do repositório
-
-| Arquivo | Finalidade |
-|---|---|
-| `HUMANIZADOR.md` | Prompt universal principal. É o arquivo recomendado para copiar como system prompt, developer prompt, custom instruction ou instrução permanente de agente. |
-| `SKILL.md` | Cópia do prompt universal mantida para compatibilidade com fluxos que procuram automaticamente um arquivo chamado `SKILL.md`. |
-| `README.md` | Documentação detalhada para humanos, com explicação de funcionamento, parâmetros, exemplos e boas práticas. |
-
-## Como funciona
-
-O Humanizador transforma o modelo em um editor. Ao receber um texto, o agente deve ler o conteúdo inteiro, identificar sinais de artificialidade, classificar o gênero textual, escolher um perfil de edição, decidir a intensidade da intervenção, reescrever apenas o necessário e apontar riscos factuais quando houver lacunas.
-
-O objetivo não é deixar o texto informal a qualquer custo. Em documentação técnica, por exemplo, humanizar significa remover ambiguidade, floreio e marketing. Em um post de LinkedIn, pode significar reduzir jargão, quebrar simetria artificial e trazer uma opinião mais nítida. Em uma proposta comercial, significa tornar a mensagem mais clara, controlando promessas e evitando adjetivos vazios.
-
-## Perfis de edição
-
-| Perfil | Quando usar | Prioridade editorial |
-|---|---|---|
-| `linkedin` | Posts, carrosséis, legendas, artigos curtos e conteúdo de opinião. | Naturalidade, opinião, concretude, menos jargão e menos tom de guru. |
-| `email-executivo` | E-mails para clientes, parceiros, diretoria, fornecedores ou times internos. | Clareza, firmeza, cordialidade real, intenção explícita e menos rodeio. |
-| `documentacao` | README, manuais, políticas, especificações, fluxos e instruções. | Precisão, sequência lógica, consistência terminológica e instrução acionável. |
-| `proposta-comercial` | Propostas, escopos, ofertas, decks e descrições de solução. | Clareza de problema, entrega, limite, benefício e promessa controlada. |
-| `academico` | Artigos, ensaios, relatórios técnico-acadêmicos e justificativas metodológicas. | Rigor, sobriedade, coesão, precisão conceitual e cuidado argumentativo. |
-| `jornalistico` | Notícias, notas, resumos factuais, releases e textos informativos. | Fato, fonte, atribuição, verificabilidade e ausência de perfume promocional. |
-
-Se o usuário não informar um perfil, use `auto`. Nesse caso, o modelo deve inferir o gênero a partir do texto e do pedido.
-
-## Modos de intensidade
-
-| Modo | Quando usar | Grau de intervenção |
-|---|---|---|
-| `leve` | O texto já está bom e só precisa perder marcas óbvias de IA. | Ajustes pontuais em frases, conectivos, adjetivos e ritmo. |
-| `padrao` | A maioria dos casos. | Reorganização moderada, corte de gordura, redução de abstrações e melhoria de transições. |
-| `forte` | Texto genérico, promocional, engessado ou claramente sintético. | Reestruturação de parágrafos, abertura, ritmo, listas e formulações vagas. |
-| `seguro-factual` | Conteúdo sensível, técnico, jornalístico, regulatório, jurídico ou reputacional. | Intervenção cautelosa, com foco em precisão e sinalização de lacunas. |
-
-## Formatos de saída
-
-| Formato | Quando usar | Resultado |
-|---|---|---|
-| `completo` | Padrão recomendado. | Diagnóstico, perfil/modo, versão revisada, riscos restantes e mudanças feitas. |
-| `somente-versao` | Quando o usuário quer apenas o texto final. | Entrega apenas a versão revisada. |
-| `diagnostico` | Quando o usuário quer entender os problemas antes de reescrever. | Entrega apenas a análise crítica. |
-| `comparativo` | Quando o usuário quer revisar mudanças trecho a trecho. | Entrega tabela com original, problema e sugestão. |
-
-## Instalação e uso manual
-
-Não há instalação obrigatória. O uso básico é copiar o conteúdo de `HUMANIZADOR.md` e colar como instrução no ambiente escolhido.
-
-### Uso em ChatGPT, Claude, Gemini ou outro chat
-
-Abra uma conversa nova, cole o conteúdo de `HUMANIZADOR.md` como primeira mensagem e, em seguida, envie o texto a revisar. Se o produto permitir criar instruções personalizadas, GPTs, projetos ou agentes, salve o conteúdo de `HUMANIZADOR.md` como instrução permanente.
-
-Modelo de chamada recomendado:
-
-```text
-Perfil: auto
-Modo: padrão
-Formato: completo
-Restrições: preservar termos técnicos; não aumentar muito o texto
-
-TEXTO A HUMANIZAR:
-[cole aqui o texto]
-```
-
-Para uma resposta direta:
-
-```text
-Humanize o texto abaixo em modo forte e entregue somente a versão final.
-
-TEXTO:
-[cole aqui o texto]
-```
-
-## Uso em agentes
-
-Em agentes autônomos, use `HUMANIZADOR.md` como instrução de papel, system prompt, developer prompt ou policy local. O agente não precisa de ferramentas para executar a edição. Se o agente tiver ferramentas de leitura e escrita, elas podem ser usadas apenas para abrir arquivos e salvar resultados; a lógica editorial não depende delas.
-
-Estrutura recomendada para agentes:
-
-```text
-[INSTRUÇÃO PERMANENTE DO AGENTE]
-Cole aqui o conteúdo de HUMANIZADOR.md.
-
-[TAREFA DO USUÁRIO]
-Humanize o texto abaixo usando perfil documentação, modo seguro-factual e formato comparativo.
-
-[TEXTO]
-...
-```
-
-Quando o agente atuar em arquivos longos, preserve a integridade do conteúdo. Ele deve ler o documento inteiro, identificar seções que exigem estilos diferentes e aplicar o perfil dominante sem misturar gêneros indevidamente.
-
-## Uso por API
-
-Em APIs que aceitam mensagens separadas, envie o conteúdo de `HUMANIZADOR.md` como mensagem de sistema ou instrução equivalente. Em seguida, envie o texto do usuário em outra mensagem. O exemplo abaixo é conceitual e pode ser adaptado a qualquer SDK.
-
-```json
-{
-  "messages": [
-    {
-      "role": "system",
-      "content": "[conteúdo integral de HUMANIZADOR.md]"
-    },
-    {
-      "role": "user",
-      "content": "Perfil: linkedin\nModo: forte\nFormato: completo\n\nTEXTO A HUMANIZAR:\n..."
-    }
-  ]
-}
-```
-
-Quando o provedor usar nomes diferentes, aplique a equivalência abaixo.
-
-| Conceito | Nome comum em plataformas |
-|---|---|
-| Instrução permanente | system prompt, developer message, custom instruction, agent instruction, role prompt, policy prompt |
-| Texto a editar | user message, input, task, conversation turn, payload |
-| Restrições | additional instructions, constraints, metadata, style guide |
-| Saída estruturada | response format, JSON schema, markdown output, template |
-
-## Uso em automações
-
-O Humanizador pode ser usado em automações de conteúdo, revisão editorial, CRM, atendimento, documentação e redes sociais. Em ferramentas como n8n, Zapier, Make ou scripts próprios, a prática recomendada é manter `HUMANIZADOR.md` como variável de configuração ou arquivo de referência e concatenar a tarefa específica a cada execução.
-
-Exemplo de template de automação:
-
-```text
-[SYSTEM]
-{conteudo_do_arquivo_HUMANIZADOR.md}
-
-[USER]
-Perfil: {perfil}
-Modo: {modo}
-Formato: {formato}
-Restrições: {restricoes}
-
-TEXTO A HUMANIZAR:
-{texto_original}
-```
-
-## Boas práticas
-
-O Humanizador funciona melhor quando recebe contexto suficiente. Sempre que possível, informe o canal, o público, o objetivo do texto, o grau de formalidade desejado e qualquer termo que deve ser preservado. Para textos autorais, envie uma amostra da voz do autor. Isso reduz o risco de o modelo transformar o texto em uma voz genérica.
-
-Para conteúdos sensíveis, use `modo: seguro-factual`. Esse modo dá prioridade à precisão e à sinalização de lacunas. Se o texto afirmar resultados sem evidência, o Humanizador deve apontar o risco em vez de suavizar a frase e fazê-la parecer mais confiável do que é.
-
-## Exemplos
-
-### Exemplo para LinkedIn
-
-Entrada:
-
-```text
-Perfil: linkedin
-Modo: forte
-Formato: completo
-
-TEXTO A HUMANIZAR:
-Em um cenário cada vez mais dinâmico, a inteligência artificial vem se consolidando como uma aliada estratégica na transformação dos negócios.
-```
-
-Saída esperada:
-
-```text
-Diagnóstico breve:
-O texto usa abertura genérica, linguagem inflada e abstrações comuns em conteúdo corporativo sobre IA.
-
-Perfil e modo usados:
-LinkedIn, modo forte.
-
-Versão revisada:
-Muita empresa fala de IA como estratégia. Na prática, boa parte ainda usa IA para remendar processo ruim com interface bonita.
-
-Riscos restantes:
-A versão revisada tem tom opinativo. Se a intenção for institucional, o tom deve ser suavizado.
-
-O que foi mudado:
-Reduzi abstrações, removi o enquadramento genérico e troquei a frase promocional por uma observação mais concreta.
-```
-
-### Exemplo para documentação
-
-Entrada:
-
-```text
-Perfil: documentacao
-Modo: padrão
-Formato: somente-versao
-
-TEXTO A HUMANIZAR:
-A plataforma atua como uma solução robusta que viabiliza a operacionalização dos processos, promovendo maior eficiência para os usuários.
-```
-
-Saída esperada:
-
-```text
-A plataforma ajuda os usuários a executar processos com menos etapas manuais.
-```
-
-A saída acima remove pose, nominalização e adjetivo vago. Se o texto original não explicar quais processos são executados nem como a eficiência melhora, o Humanizador não deve inventar esse detalhe.
-
-## Marcas d'água e caracteres invisíveis
-
-Existem duas coisas diferentes que costumam ser chamadas de "marca d'água" em texto, e o
-Humanizador se relaciona com cada uma de um jeito.
-
-**Caracteres invisíveis (o Humanizador remove).** São code points Unicode reais que viajam
-junto com o texto sem aparecer na tela: zero width space, soft hyphen, marcas
-bidirecionais, o bloco de tags Unicode, homóglifos de outro alfabeto. Entram por acidente
-(cópia de PDF, de editor web) ou de propósito, para rastrear cópia. O Humanizador tem uma
-regra determinística que remove ou normaliza esses caracteres em todo perfil e modo, e
-informa a contagem no diagnóstico. Isso é higiene de texto: esses caracteres quebram
-busca, atrapalham leitor de tela e corrompem comparação de arquivos.
-
-**Marca d'água estatística (o Humanizador não promete nada).** É outra categoria. O
-SynthID-Text, do Google DeepMind, publicado na Nature em 2024 e em produção no Gemini,
-não insere caractere nenhum: ele envieza a escolha de tokens durante a geração usando uma
-chave secreta, deixando uma assinatura estatística no texto. Não há o que "apagar", porque
-não existe um caractere para remover.
-
-O que a literatura publicada mostra é que reescrita substantiva (paráfrase, retradução,
-reestruturação) degrada a detectabilidade desse tipo de marca, enquanto edição superficial
-não muda quase nada. O Humanizador faz reescrita substantiva por natureza, então esse
-efeito acontece como consequência, não como funcionalidade.
-
-**Mas ele não promete remoção, por três motivos honestos:**
-
-1. **Não há como verificar.** A chave do detector é secreta. Nem você nem o Humanizador
-   conseguem rodar o detector para confirmar se sobrou sinal. Prometer um resultado que
-   ninguém pode conferir seria vender fumaça.
-2. **O grau de degradação depende de quanto o texto mudou.** Modo leve muda pouco, e pouca
-   mudança significa pouca degradação. Não existe garantia por design.
-3. **A finalidade da skill é editorial.** Ela existe para o texto ficar melhor, não para
-   burlar sistemas de proveniência. Se o seu objetivo é especificamente evasão de detecção,
-   esta não é a ferramenta certa, e o resultado não é garantido de qualquer forma.
-
-Se você está usando IA para rascunhar e depois editando de verdade, o texto resultante é
-seu, e é isso que o Humanizador ajuda a fazer. Essa é a diferença entre editar e disfarçar.
-
-## Limitações
-
-O Humanizador não verifica fatos fora do texto original, a menos que seja combinado com ferramentas de pesquisa ou checagem externa. Ele também não deve prometer originalidade, indetectabilidade por classificadores de IA ou bypass de sistemas de detecção. A finalidade correta é editorial: melhorar clareza, naturalidade e adequação ao contexto.
-
-## Compatibilidade
-
-O Humanizador é compatível com qualquer ambiente que aceite instruções em linguagem natural. Isso inclui chats de LLM, APIs, agentes autônomos, workflows de automação, assistentes internos, sistemas de atendimento, editores com IA e pipelines de conteúdo.
-
-| Ambiente | Como usar |
-|---|---|
-| ChatGPT, Claude, Gemini e similares | Cole `HUMANIZADOR.md` como instrução ou primeira mensagem. |
-| Agentes customizados | Use `HUMANIZADOR.md` como prompt de sistema ou instrução permanente. |
-| APIs | Envie `HUMANIZADOR.md` como mensagem de sistema e o texto como mensagem de usuário. |
-| Automação | Salve `HUMANIZADOR.md` como variável ou arquivo e concatene com o texto de entrada. |
-| Repositórios de prompts | Publique `HUMANIZADOR.md` como prompt principal e preserve este README como documentação. |
+Sem executar uma medição, o agente não deve inventar contagens. No formato
+somente-versao, não anexar diagnósticos opcionais nem alterar caracteres ambíguos.
 
 ## Verificação de versão com consentimento
 
-Esta skill foi padronizada para operar como uma skill atualizável com consentimento humano. No início de um uso relevante, quando houver internet e ferramentas Git ou HTTP disponíveis, o agente deve consultar o repositório de origem, ler o `README.md` e o `CHANGELOG.md` quando existirem, comparar a cópia local com a versão upstream e resumir as novidades encontradas.
+Quando encontrar uma versão mais nova, a skill deve resumir as mudanças e oferecer
+explicitamente a atualização. Avisar da diferença sem oferecer não basta.
+Uma autorização de atualização já presente na conversa é suficiente; não perguntar
+novamente. Depois de uma recusa, não insistir na mesma sessão.
 
-Essa checagem não autoriza autoatualização silenciosa. A regra é: **verificar, explicar e perguntar**. O agente deve informar o que mudou, dizer se a mudança impacta a tarefa atual e pedir autorização explícita antes de atualizar qualquer arquivo local da skill. O protocolo completo está em [`references/version-check.md`](references/version-check.md).
+A leitura pública e a comparação são informativas. Atualizar arquivos exige
+autorização; descartar alterações locais requer decisão específica. Depois de
+salvar, verificar conteúdo e versão. O protocolo detalhado está em
+references/version-check.md.
 
-## Histórico de alterações
+## Desenvolvimento e validação
 
-| Data | Versão | Alteração | Motivo |
-|---|---|---|---|
-| 2026-08-21 | 3.2.0 | Seção sobre dois-pontos usado como muleta explicativa; regra determinística de sanitização de caracteres invisíveis (zero width, soft hyphen, bidi, bloco de tags Unicode, homóglifos); seção no README distinguindo caractere invisível de marca d'água estatística. | Fechar duas lacunas de padrão estrutural e deixar explícito, com honestidade, o que a skill faz e não faz em relação a marcação de texto. |
-| 2026-08-05 | 3.1.0 | Seção dedicada ao paralelismo negativo ("não é X, é Y") como principal marca estrutural de texto de IA, com detecção por frequência e orientação de reescrita; novas entradas na biblioteca de padrões (transição-isca, regra de três mecânica); `HUMANIZADOR.md` passou a ser gerado a partir do `SKILL.md` em vez de mantido à mão. | Fechar a lacuna do padrão estrutural mais comum não coberto pela versão anterior, e eliminar divergência entre os dois arquivos de conteúdo. |
-| 2026-05-26 | 3.0.0 | Transformação da skill em prompt universal portátil; remoção de campos específicos de plataforma; criação de documentação detalhada no README; criação de `HUMANIZADOR.md`; manutenção de `SKILL.md` como cópia compatível. | Permitir uso em qualquer agente ou LLM, conforme solicitação do autor. |
+Editar o núcleo e os módulos, nunca a versão portátil à mão. Gerar e conferir:
 
-## Créditos
+    python scripts/build_prompt.py
+    python scripts/validate_skill.py
+    python -m unittest discover -s tests -v
+    python scripts/build_prompt.py --check
 
-Este projeto partiu do trabalho do Humanizer, publicado por [@blader][1]. A versão atual foi mantida no repositório `AndreAlmeidaDC/humanizador` e expandida com perfis de edição para português brasileiro, novos padrões de detecção, modos de intensidade e uma estrutura universal para uso em agentes e LLMs.[2]
+Os testes verificam código e empacotamento. Não demonstram por si sós qualidade
+editorial, acessibilidade ou comportamento de todo modelo. Usar também os cenários
+em references/cenarios.md com tarefas reais e preservar a separação entre insumo e
+critério de avaliação.
 
-## Referências
+## Pesquisa e créditos
 
-[1]: https://github.com/blader/humanizer "Humanizer — repositório original de referência"
-[2]: https://github.com/AndreAlmeidaDC/humanizador "Humanizador — repositório mantido por André Almeida"
+A ampliação usa orientações de W3C/WAI, Unicode Consortium, GOV.UK, Government Analysis
+Function, Microsoft e Nielsen Norman Group. O registro em references/fontes.md
+distingue critérios técnicos de escolhas editoriais e contextualiza as fontes.
 
-## Licença
+O material de referência enviado pelo autor incluiu capturas de um carrossel de
+Tuti Nicola (@tutinicola) sobre padrões de comunicação. As imagens não são
+redistribuídas neste pacote. As recomendações foram formuladas para esta skill e
+conferidas com fontes primárias, sem tratar o carrossel como prova científica.
 
-MIT
+O projeto partiu do Humanizer de @blader:
+https://github.com/blader/humanizer
+
+Origem mantida por André Almeida:
+https://github.com/AndreAlmeidaDC/humanizador
+
+## Histórico
+
+Consultar CHANGELOG.md. A versão 3.0 tornou o prompt portátil; a 3.1 aprofundou os
+padrões de estrutura; a 3.2 acrescentou dois-pontos e Unicode; a 4.0 amplia os meios,
+corrige exemplos e torna os limites operacionais explícitos.

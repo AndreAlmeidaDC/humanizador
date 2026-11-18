@@ -1,5 +1,46 @@
 # Changelog
 
+## 4.0.0 | 2026-11-12 | pacote 2026.11.12
+
+### Ampliação de escopo
+
+- Adicionado roteamento para peças visuais, apresentações, carrosséis, interfaces,
+  conversas, gráficos, dashboards, roteiros, áudio, vídeo, legendas e transcrições.
+- Mantidos perfis textuais, modos e formatos anteriores; adicionados material,
+  ação e plano-de-edicao.
+- Incorporadas orientações com fontes primárias sobre hierarquia, densidade,
+  acessibilidade, interação, dados, mídia e proveniência.
+- Estabelecida a distinção entre observado, medido, informado, não verificado
+  e proposta, com limites específicos para screenshots e mídia ausente.
+
+### Correções de comportamento
+
+- Exemplos agora preservam fatos, opinião, causalidade e experiência fornecidos.
+- Padrões estéticos e de linguagem tratados como heurísticas editoriais, sem
+  afirmações de detecção de autoria por IA.
+- Repetição funcional preservada em rótulos, erros, unidades, marca e navegação.
+- Oferta explícita de atualização quando a origem está mais nova; autorização
+  já presente é suficiente, sem confirmação repetida.
+- Proteção contra downgrade de uma cópia local mais nova que a origem.
+
+### Unicode e ferramentas
+
+- Removida a regra ampla de apagar classes Unicode automaticamente.
+- Adicionado auditor somente leitura com contagem exata dos code points cobertos.
+- Preservados usos legítimos em idiomas, emojis, tags, variantes, código e citações.
+- Resolvido o conflito de diagnóstico com somente-versao.
+- Adicionado gerador determinístico de HUMANIZADOR.md com os módulos incorporados.
+- Ampliada validação de versões, arquivos e bundle; incluídos testes dos helpers.
+
+### Compatibilidade
+
+Mudança major: gatilhos mais amplos, estrutura modular e novo tratamento de Unicode.
+O núcleo permanece portátil e sem runtime obrigatório. Python 3.10+ é necessário
+somente para os helpers opcionais. Execução de mídia depende do ambiente e não é
+prometida pelo prompt. Não há dependência externa obrigatória.
+
+## Histórico anterior
+
 All notable changes to this skill are documented here. This file is the preferred human-readable source for update checks.
 
 | Date | Time | Version | Changes |

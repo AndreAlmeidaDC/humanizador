@@ -1,57 +1,51 @@
-# Contributing
+# Contribuição
 
-Obrigado por contribuir com **Humanizador**. Este repositório contém uma Agent Skill; mudanças aqui alteram como agentes se comportam, tomam decisões, consultam contexto e pedem consentimento ao usuário.
+Mudanças neste pacote alteram o comportamento de agentes. Preservar clareza,
+fidelidade, identidade e consentimento, com complexidade proporcional à tarefa.
 
-## Principles
+## Onde editar
 
-Contributions should preserve three properties: **clareza operacional**, **segurança por consentimento** and **mínima complexidade suficiente**. Do not add process for its own sake. Add rules only when they reduce ambiguity, prevent unsafe behavior or improve repeatability.
+- SKILL.md: contrato comum, roteamento, entrada e saída.
+- references: regras detalhadas por material e fontes verificáveis.
+- scripts: operações determinísticas opcionais.
+- tests: preservação de conteúdo e comportamento dos helpers.
+- README.md, metadata.json e CHANGELOG.md: escopo, versão e mudanças.
+- agents/openai.yaml: apresentação e acionamento no ambiente de skills.
 
-## What to change where
+SKILL.md e as referências são as fontes editoriais. HUMANIZADOR.md é gerado e
+não deve ser editado à mão.
 
-| Need | Preferred file |
-|---|---|
-| Agent behavior, activation rules or output format | `SKILL.md` |
-| Human-facing explanation, installation or examples | `README.md` |
-| Reusable protocols or deeper guidance | `references/` |
-| Reusable deliverable formats | `templates/` or `examples/` |
-| Validation or automation | `scripts/` |
-| Release notes | `CHANGELOG.md` |
-| Maintenance rules | `GOVERNANCE.md` |
+## Gerar e validar
 
-## Version-check requirement
+    python scripts/build_prompt.py
+    python scripts/validate_skill.py
+    python -m unittest discover -s tests -v
+    python scripts/build_prompt.py --check
 
-Any behavioral change must preserve the origin version check rule: the skill may consult its upstream repository, read README/CHANGELOG, summarize changes and ask whether the user wants to update, but it must never update itself silently or overwrite local edits without explicit approval.
+O gerador remove o frontmatter e a seção Origin version check, preserva o conteúdo
+editorial e incorpora os módulos fixos na ordem definida no script. O validador
+detecta divergência de versões, arquivos ausentes e desatualização do bundle.
 
-## Before opening a pull request
+## Revisar comportamento
 
-Run the local validation command when present:
+Manter o núcleo abaixo de 500 linhas e carregar módulos sob demanda. Não criar uma
+lista universal de estilos proibidos. Cada recomendação deve ter contexto, efeito
+e limite, especialmente quando vier de uma norma ou design system.
 
-```bash
-python3 scripts/validate_skill.py
-```
+Conferir exemplos contra a entrada. Uma frase mais específica não pode ganhar fatos
+que o original não tinha. Preservar código, falas e dados. Informar capacidade
+necessária para editar ou verificar o material.
 
-Then review the diff manually and answer these questions in the PR description:
+Ao avaliar em outro agente, fornecer a skill e o pedido original sem o resultado
+esperado. Consultar references/cenarios.md apenas para preparar e julgar o teste.
 
-| Question | Expected answer |
-|---|---|
-| Did this change alter agent behavior? | Explain the behavior. |
-| Is this a breaking change for existing users? | Yes/No, with reason. |
-| Does the update preserve explicit user consent before self-update? | Yes. |
-| Were local validation checks run? | Include command and result. |
+## Publicar
 
-## Change history
+Explicar por que a mudança foi necessária, o comportamento resultante e os testes
+executados. Registrar mudanças de gatilhos, dependências e consentimento. Não usar
+um resultado de validação estrutural como prova de acessibilidade ou qualidade
+em todos os modelos.
 
-| Date | Time | Reason |
-|---|---|---|
-| 2026-06-02 | 09:02 GMT-3 | Added contribution guidelines for maintaining the skill as an update-aware public repository. |
-
-## SKILL.md e HUMANIZADOR.md
-
-O `SKILL.md` e a fonte da verdade. O `HUMANIZADOR.md` e uma versao "colavel" do mesmo
-conteudo, gerada a partir do `SKILL.md` removendo o frontmatter YAML e a secao
-"Origin version check" (que sao metadados da skill, nao instrucao editorial).
-
-Ao editar o conteudo editorial, edite o `SKILL.md` e regenere o `HUMANIZADOR.md`. Nao
-edite os dois a mao: foi assim que eles divergiram no passado. A regra de geracao e:
-remover o bloco entre as duas primeiras linhas `---` e remover a secao
-`## Origin version check` ate o proximo `## `.
+Preservar a oferta de atualização e a regra de não substituir arquivos sem
+autorização. Um pedido explícito de atualizar já satisfaz a autorização para esse
+escopo e não exige confirmação repetida.

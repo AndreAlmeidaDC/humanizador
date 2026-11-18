@@ -1,45 +1,79 @@
 {
   "name": "humanizador",
-  "title": "Humanizador",
-  "description": "Skill para remover sinais de texto com cara de IA em português brasileiro sem inventar fatos.",
-  "version": "2026.08.21",
+  "title": "Humanizador Universal",
+  "description": "Revisão editorial de textos, visuais, apresentações, interfaces, conversas, dados e audiovisual, preservando fatos e identidade.",
+  "version": "2026.11.12",
+  "content_version": "4.0.0",
   "maturity": "stable",
   "origin_url": "https://github.com/AndreAlmeidaDC/humanizador",
   "origin_git_url": "https://github.com/AndreAlmeidaDC/humanizador.git",
   "default_branch": "master",
   "author": "André Almeida",
   "license": "MIT",
+  "last_standardized_at": "2026-11-12 GMT-3",
+  "runtime": {
+    "core": "Instruções em linguagem natural; sem dependência obrigatória.",
+    "optional_helpers": "Python >=3.10, apenas biblioteca padrão.",
+    "media": "Inspeção e edição dependem das capacidades e ferramentas disponíveis."
+  },
   "declared_capabilities": {
     "network_egress": {
-      "expected": false,
-      "reason": "Pure text-transformation prompt; no network access, no external tools."
+      "expected": true,
+      "conditional": true,
+      "reason": "Consulta de versão uma vez por conversa e fontes quando pertinentes; o núcleo editorial pode operar offline."
     },
     "subprocess": {
       "expected": false,
-      "reason": "No code execution; the skill is instruction text only."
+      "optional": true,
+      "reason": "Helpers locais opcionais para inventário Unicode, geração e validação do pacote."
     },
     "dependency_install": {
       "expected": false,
-      "reason": "No dependencies and no installation."
+      "reason": "Sem dependência obrigatória e sem instalação automática de bibliotecas."
+    },
+    "media_processing": {
+      "expected": false,
+      "optional": true,
+      "reason": "Usar ferramentas de mídia do ambiente apenas quando o pedido e a capacidade permitirem."
     }
   },
-  "last_standardized_at": "2026-08-21 GMT-3",
   "required_files": [
     "SKILL.md",
+    "HUMANIZADOR.md",
     "README.md",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
     "GOVERNANCE.md",
     "metadata.json",
-    "references/version-check.md"
+    "references/version-check.md",
+    "references/texto.md",
+    "references/visual.md",
+    "references/apresentacoes.md",
+    "references/interfaces.md",
+    "references/dados.md",
+    "references/audiovisual.md",
+    "references/unicode.md",
+    "references/fontes.md",
+    "references/cenarios.md",
+    "scripts/audit_unicode.py",
+    "scripts/build_prompt.py",
+    "scripts/validate_skill.py",
+    "tests/test_tools.py",
+    "agents/openai.yaml",
+    "assets/icon.svg"
   ],
   "update_policy": {
     "check_upstream_on_meaningful_use": true,
+    "max_automatic_checks_per_conversation": 1,
     "read_upstream_readme": true,
     "read_upstream_changelog": true,
     "summarize_changes_before_update": true,
+    "explicit_update_offer_required": true,
+    "existing_explicit_authorization_is_sufficient": true,
     "requires_user_consent": true,
     "silent_self_update_allowed": false,
-    "overwrite_local_changes_allowed_without_consent": false
+    "overwrite_local_changes_allowed_without_consent": false,
+    "verify_persisted_version": true,
+    "allow_downgrade_without_explicit_request": false
   }
 }

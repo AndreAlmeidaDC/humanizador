@@ -1,0 +1,13 @@
+interface:
+  display_name: "Humanizador"
+  short_description: "Revise textos, visuais, interfaces e roteiros"
+  default_prompt: "Use $humanizador para revisar este material, preservar minha voz e corrigir problemas de clareza, hierarquia e repetição."
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
+policy:
+  products:
+    - "chatgpt"
+    - "codex"
+    - "api"
+    - "atlas"
+  allow_implicit_invocation: true

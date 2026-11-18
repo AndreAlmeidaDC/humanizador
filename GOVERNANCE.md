@@ -1,47 +1,42 @@
-# Governance
+# Governança
 
-This repository is maintained as an update-aware Agent Skill by **André Almeida**.
+Manutenção: André Almeida.
 
-## Maintenance model
+## Escopo e autoridade
 
-The skill is public and reusable, but changes should be treated as changes to agent behavior. The maintainer decides what enters the default branch and when a change should be released, tagged or documented as breaking.
+O Humanizador é uma especificação editorial portátil com helpers opcionais.
+A versão 4.0 amplia meios e gatilhos, mas não cria acesso a ferramentas, contas,
+mídias ou projetos. A execução depende das capacidades e da autorização presentes
+na tarefa. Instruções do usuário prevalecem sobre preferências editoriais padrão.
 
-## Consent and self-update policy
+## Atualizações
 
-The skill may instruct an agent to check the upstream repository before meaningful use. That check is informational until the user approves an update.
+Consulta pública e comparação não autorizam substituição de arquivos.
+Quando houver uma versão nova, informar o impacto e oferecer a atualização.
+Reutilizar autorização explícita já dada para a mesma ação. Não perguntar de novo
+por uma atualização que a pessoa acabou de pedir.
 
-The following actions require explicit user consent:
+Não atualizar silenciosamente, descartar alterações locais, modificar outro projeto
+ou afirmar persistência sem conferi-la. A regra completa está em
+references/version-check.md.
 
-| Action | Consent required? |
-|---|---:|
-| Reading upstream README/CHANGELOG | No, if public and task-relevant. |
-| Comparing local and upstream versions | No, if non-destructive. |
-| Summarizing available changes | No. |
-| Pulling, copying or overwriting local skill files | Yes. |
-| Discarding local edits | Yes, and should normally be avoided. |
-| Changing the user's target project because of a skill update | Yes, as a separate action. |
+## Mudanças relevantes
 
-## Versioning
+Usar versão major para expansão de gatilhos, mudança de contrato de saída,
+alteração de preservação ou nova dependência obrigatória. Registrar conteúdo,
+capacidade, testes e limites. Diferenciar funcionalidade opcional de requisito.
 
-Use `CHANGELOG.md` as the human-readable source of release notes. Use Git tags when a version should be cited, installed or compared by other agents.
+Preservar autoria e fontes. Não importar capturas, mídia ou dados de terceiros para
+o repositório apenas porque foram usados em uma conversa de revisão.
 
-Recommended version labels:
+## Qualidade
 
-| Label | Meaning |
-|---|---|
-| `draft` | Experimental and not recommended for broad reuse. |
-| `beta` | Usable, but behavior may still change frequently. |
-| `stable` | Suitable for recurring use. |
-| `archived` | Preserved for history, not actively recommended. |
+Validar estrutura e versão portátil, executar os testes dos helpers e avaliar casos
+de uso independentes. Testes de código não comprovam qualidade editorial universal.
+Registros de teste não devem conter dados pessoais nem conteúdo privado do usuário.
 
-## Breaking changes
+## Histórico
 
-A change is breaking when it changes activation conditions, non-negotiable rules, user-consent behavior, required artifacts, output format, safety boundaries or update behavior in a way that may surprise existing users.
-
-Breaking changes should be called out in `CHANGELOG.md` and, when appropriate, released with a new tag.
-
-## Change history
-
-| Date | Time | Reason |
-|---|---|---|
-| 2026-06-02 | 09:02 GMT-3 | Added governance rules for update-aware skill maintenance, explicit consent and release discipline. |
+- 2026-11-12: governança da ampliação multimodal e distinção entre capacidades,
+  instruções, autorização e persistência.
+- 2026-06-02: governança inicial de atualização com consentimento.
